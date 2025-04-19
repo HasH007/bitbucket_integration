@@ -72,7 +72,7 @@ const RepoForm = () => {
             <h2>Repository Information</h2>
             <form onSubmit={handleSubmit} className="repo-form">
                 <div className="form-group">
-                    <label htmlFor="repository">Repository URL:</label>
+                    <label htmlFor="repository">Primary Repository URL:</label>
                     <input
                         type="text"
                         id="repository"
