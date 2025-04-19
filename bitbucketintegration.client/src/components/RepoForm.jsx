@@ -9,6 +9,7 @@ const RepoForm = () => {
         referredRepos: []
     });
     const [message, setMessage] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
     const [newReferredRepo, setNewReferredRepo] = useState({
         repository: '',
         branchName: ''
@@ -37,6 +38,7 @@ const RepoForm = () => {
                 referredRepos: [...prev.referredRepos, newReferredRepo]
             }));
             setNewReferredRepo({ repository: '', branchName: '' });
+            setShowPopup(false);
         }
     };
 
@@ -109,11 +111,23 @@ const RepoForm = () => {
                 </div>
 
                 <div className="referred-repos-section">
-                    <h3>Additional Referred Repositories</h3>
+                    <div className="referred-repos-header">
+                        <h3>Additional Referred Repositories</h3>
+                        <button
+                            type="button"
+                            className="add-link"
+                            onClick={() => setShowPopup(true)}
+                        >
+                            Add Repository
+                        </button>
+                    </div>
                     <div className="referred-repos-list">
                         {formData.referredRepos.map((repo, index) => (
                             <div key={index} className="referred-repo-item">
-                                <span>{repo.repository} ({repo.branchName})</span>
+                                <div className="repo-details">
+                                    <div className="repo-url">{repo.repository}</div>
+                                    <div className="repo-branch">Branch: {repo.branchName}</div>
+                                </div>
                                 <button
                                     type="button"
                                     className="remove-button"
@@ -124,7 +138,16 @@ const RepoForm = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="add-referred-repo">
+                </div>
+
+                <button type="submit" className="submit-button">Submit</button>
+            </form>
+            {message && <div className="message">{message}</div>}
+
+            {showPopup && (
+                <div className="popup-overlay">
+                    <div className="popup-content">
+                        <h3>Add Referred Repository</h3>
                         <div className="form-group">
                             <label htmlFor="referredRepository">Repository URL:</label>
                             <input
@@ -133,6 +156,7 @@ const RepoForm = () => {
                                 name="repository"
                                 value={newReferredRepo.repository}
                                 onChange={handleReferredRepoChange}
+                                placeholder="Enter repository URL"
                             />
                         </div>
                         <div className="form-group">
@@ -143,22 +167,32 @@ const RepoForm = () => {
                                 name="branchName"
                                 value={newReferredRepo.branchName}
                                 onChange={handleReferredRepoChange}
+                                placeholder="Enter branch name"
                             />
                         </div>
-                        <button
-                            type="button"
-                            className="add-button"
-                            onClick={addReferredRepo}
-                            disabled={!newReferredRepo.repository || !newReferredRepo.branchName}
-                        >
-                            Add Repository
-                        </button>
+                        <div className="popup-buttons">
+                            <button
+                                type="button"
+                                className="cancel-button"
+                                onClick={() => {
+                                    setShowPopup(false);
+                                    setNewReferredRepo({ repository: '', branchName: '' });
+                                }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="button"
+                                className="add-button"
+                                onClick={addReferredRepo}
+                                disabled={!newReferredRepo.repository || !newReferredRepo.branchName}
+                            >
+                                Add
+                            </button>
+                        </div>
                     </div>
                 </div>
-
-                <button type="submit" className="submit-button">Submit</button>
-            </form>
-            {message && <div className="message">{message}</div>}
+            )}
         </div>
     );
 };

@@ -1,0 +1,97 @@
+[33mcommit 740dcffe4106a48a30b927d176112801979605a5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: IvyLeagueNode <IvyLeagueNode@NUCBOX_M7>
+Date:   Fri Apr 18 18:19:54 2025 -0500
+
+    Add project files.
+
+[1mdiff --git a/.dockerignore b/.dockerignore[m
+[1mnew file mode 100644[m
+[1mindex 0000000..fe1152b[m
+[1m--- /dev/null[m
+[1m+++ b/.dockerignore[m
+[36m@@ -0,0 +1,30 @@[m
+[32m+[m[32m**/.classpath[m
+[32m+[m[32m**/.dockerignore[m
+[32m+[m[32m**/.env[m
+[32m+[m[32m**/.git[m
+[32m+[m[32m**/.gitignore[m
+[32m+[m[32m**/.project[m
+[32m+[m[32m**/.settings[m
+[32m+[m[32m**/.toolstarget[m
+[32m+[m[32m**/.vs[m
+[32m+[m[32m**/.vscode[m
+[32m+[m[32m**/*.*proj.user[m
+[32m+[m[32m**/*.dbmdl[m
+[32m+[m[32m**/*.jfm[m
+[32m+[m[32m**/azds.yaml[m
+[32m+[m[32m**/bin[m
+[32m+[m[32m**/charts[m
+[32m+[m[32m**/docker-compose*[m
+[32m+[m[32m**/Dockerfile*[m
+[32m+[m[32m**/node_modules[m
+[32m+[m[32m**/npm-debug.log[m
+[32m+[m[32m**/obj[m
+[32m+[m[32m**/secrets.dev.yaml[m
+[32m+[m[32m**/values.dev.yaml[m
+[32m+[m[32mLICENSE[m
+[32m+[m[32mREADME.md[m
+[32m+[m[32m!**/.gitignore[m
+[32m+[m[32m!.git/HEAD[m
+[32m+[m[32m!.git/config[m
+[32m+[m[32m!.git/packed-refs[m
+[32m+[m[32m!.git/refs/heads/**[m
+\ No newline at end of file[m
+[1mdiff --git a/BitbucketIntegration.Server/BitbucketIntegration.Server.csproj b/BitbucketIntegration.Server/BitbucketIntegration.Server.csproj[m
+[1mnew file mode 100644[m
+[1mindex 0000000..cf16d73[m
+[1m--- /dev/null[m
+[1m+++ b/BitbucketIntegration.Server/BitbucketIntegration.Server.csproj[m
+[36m@@ -0,0 +1,28 @@[m
+[32m+[m[32m<Project Sdk="Microsoft.NET.Sdk.Web">[m
+[32m+[m
+[32m+[m[32m  <PropertyGroup>[m
+[32m+[m[32m    <TargetFramework>net8.0</TargetFramework>[m
+[32m+[m[32m    <Nullable>enable</Nullable>[m
+[32m+[m[32m    <ImplicitUsings>enable</ImplicitUsings>[m
+[32m+[m[32m    <UserSecretsId>3b6cd3d1-5e7a-42c7-a74c-6fe64682541b</UserSecretsId>[m
+[32m+[m[32m    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>[m
+[32m+[m[32m    <SpaRoot>..\bitbucketintegration.client</SpaRoot>[m
+[32m+[m[32m    <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>[m
+[32m+[m[32m    <SpaProxyServerUrl>https://localhost:49991</SpaProxyServerUrl>[m
+[32m+[m[32m  </PropertyGroup>[m
+[32m+[m
+[32m+[m[32m  <ItemGroup>[m
+[32m+[m[32m    <PackageReference Include="Microsoft.AspNetCore.SpaProxy">[m
+[32m+[m[32m      <Version>8.*-*</Version>[m
+[32m+[m[32m    </PackageReference>[m
+[32m+[m[32m    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />[m
+[32m+[m[32m    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />[m
+[32m+[m[32m  </ItemGroup>[m
+[32m+[m
+[32m+[m[32m  <ItemGroup>[m
+[32m+[m[32m    <ProjectReference Include="..\bitbucketintegration.client\bitbucketintegration.client.esproj">[m
+[32m+[m[32m      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>[m
+[32m+[m[32m    </ProjectReference>[m
+[32m+[m[32m  </ItemGroup>[m
+[32m+[m
+[32m+[m[32m</Project>[m
+[1mdiff --git a/BitbucketIntegration.Server/BitbucketIntegration.Server.http b/BitbucketIntegration.Server/BitbucketIntegration.Server.http[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f323822[m
+[1m--- /dev/null[m
+[1m+++ b/BitbucketIntegration.Server/BitbucketIntegration.Server.http[m
+[36m@@ -0,0 +1,6 @@[m
+[32m+[m[32m@BitbucketIntegration.Server_HostAddress = http://localhost:5011[m
+[32m+[m
+[32m+[m[32mGET {{BitbucketIntegration.Server_HostAddress}}/weatherforecast/[m
+[32m+[m[32mAccept: application/json[m
+[32m+[m
+[32m+[m[32m###[m
+[1mdiff --git a/BitbucketIntegration.Server/CHANGELOG.md b/BitbucketIntegration.Server/CHANGELOG.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..fb42f97[m
+[1m--- /dev/null[m
+[1m+++ b/BitbucketIntegration.Server/CHANGELOG.md[m
+[36m@@ -0,0 +1,9 @@[m
+[32m+[m[32mThis file explains how Visual Studio created the project.[m
+[32m+[
